@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark mode</title>
+</head>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        padding: 0 2%;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    h1 {
+        font-size: 40px;
+        margin: 0;
+        align-self: center;
+    }
+    #intro {
+        align-items: flex-start;
+        background-color: #f0f0f0;
+        padding: 20px;
+        font-size: 16px;
+        width: 40%;
+        max-height: 500px;
+        overflow-y: auto;
+        text-align: left;
+        margin: 20px 0;
+        border-radius: 15px;
+    }
+    .dark-mode {
+        background-color: #333;
+        color: #fff;
+    }
+    .dark-mode #intro {
+        background-color: #4c4c4c;
+        color: #fff;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+        align-self: center;
+    }
+</style>
+<body>
+    <h1>Dark Mode</h1>
+    <div id="intro">My name is Mahajan Khushwant Singh. I am 19 years old. I am studying in SGGSIE&T, Nanded. I am a student of B.Tech in Computer Science and Engineering. I love to work on my laptop and I have done many projects so far and currently I am working on one of my big projects. I am always eager to learn new things but that's also one of my weakness as because this eagnerness I am never able to focus on one thing for a long time. My other hobbies are playing basketbaal, badminton, watching anime, playing minecraft and many more.</div>
+    <button id="toggle-dark-mode">Toggle Dark Mode</button>
+
+    <script>
+        const toggleButton = document.getElementById('toggle-dark-mode');
+        const body = document.body;
+
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+        });
+    </script>
+</body>
+</html>
