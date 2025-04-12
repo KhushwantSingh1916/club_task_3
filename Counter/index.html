@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        height: 100vh;
+        background: linear-gradient(to right, #b6faa0, #7bfe93);
+    }
+    h1 {
+        justify-self: center;
+        font-size: 3.5rem;
+    }
+    p {
+        background-color: #fff;
+        justify-self: center;
+        padding: 10px;
+        border: 2px solid #000;
+        border-radius: 5px;
+        font-size: 3rem;
+        margin: 12rem 0 1rem 0;
+    }
+    #clicks {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    button {
+        border-radius: 50px;
+        font-size: 2rem;
+        margin: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+</style>
+<body>
+    <div><h1>Counter</h1></div>
+    <div><p id="counter">0</p></div>
+    <div id="clicks">
+        <button id="decrement" onclick="decrement()">➖</button>
+        <button id="reset" onclick="reset()">RESET</button>
+        <button id="increment" onclick="increment()">➕</button>
+    </div>
+    <script>
+        let count = localStorage.getItem("count") || 0;
+        const counterEle=document.getElementById("counter");
+        function increment() {
+            count++;
+            counterEle.innerText=count;
+            localStorage.setItem("count", count);
+        }
+        function decrement() {
+            count--;
+            counterEle.innerText=count;
+            localStorage.setItem("count", count);
+        }
+        function reset() {
+            count = 0;
+            counterEle.innerText=count;
+            localStorage.setItem("count", count);
+        }
+        window.onload = function() {
+            counterEle.innerText=count;
+        } 
+    </script>
+</body>
+</html>
