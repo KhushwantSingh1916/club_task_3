@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <style>
+        body {
+            text-align: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(to right,  #1a1a1a, #2d2d2d);
+            font-family: Arial, sans-serif;
+            color: white;
+            padding-top: px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 8rem;
+        }
+
+        .timer-container {
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        input {
+            width: 5rem;
+            padding: 10px;
+            margin: 0 2px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: white;
+            text-align: center;
+        }
+
+        input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        #timer-display {
+            display: inline-block;
+            font-size: 4rem;
+            font-weight: bold;
+            margin: 2rem auto;
+            background-color: rgba(0, 0, 0, 0.05);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 12px 25px;
+            margin: 0 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.1s, background-color 0.3s;
+            background-color: #404040;
+            color: white;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background-color: #505050;
+        }
+        span {
+            font-size: 2rem;
+            color: white;
+            margin-left: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="timer-container">
+        <h1>Timer</h1>
+            <input type="number" id="hours" placeholder="HH"><span>:</span>
+            <input type="number" id="minutes" placeholder="MM"><span>:</span>
+            <input type="number" id="seconds" placeholder="SS">
+            <display id="timer-display">00:00:00</display>
+        <div>
+            <button id="start-timer">Start Timer</button>
+            <button id="stop-timer">Stop Timer</button>
+            <button id="reset-timer">Reset Timer</button>
+        </div>
+    </div>
+<script>
+    let hours = document.getElementById("hours");
+    let minutes = document.getElementById("minutes");
+    let seconds = document.getElementById("seconds");
+    let timerDisplay = document.getElementById("timer-display");
+    let startButton = document.getElementById("start-timer");
+    let stopButton = document.getElementById("stop-timer");
+    let resetButton = document.getElementById("reset-timer");
+    let interval;
+    let totalSeconds = 0;
+    startButton.addEventListener("click", function(){
+        clearInterval(interval);
+        totalSeconds = (parseInt(hours.value) || 0) * 3600 + (parseInt(minutes.value) || 0) * 60 + (parseInt(seconds.value) || 0);
+        if (totalSeconds > 0) {
+            interval = setInterval(updateTimer, 1000);
+        }
+    });
+    stopButton.addEventListener("click", function(){
+        clearInterval(interval);
+    });
+    resetButton.addEventListener("click", function(){
+        clearInterval(interval);
+        totalSeconds = 0;
+        timerDisplay.textContent = "00:00:00";
+        hours.value = "HH";
+        minutes.value = "MM";
+        seconds.value = "SS";
+    });
+    function updateTimer() {
+        if (totalSeconds <= 0) {
+            clearInterval(interval);
+            alert("Time's up!");
+            return;
+        }
+        totalSeconds--;
+        let h = Math.floor(totalSeconds / 3600);
+        let m = Math.floor((totalSeconds % 3600) / 60);
+        let s = totalSeconds % 60;
+        timerDisplay.textContent = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+</script>
+</body>
+</html>
